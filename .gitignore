@@ -97,3 +97,16 @@ proguard/
 /report
 
 .vscode
+# Local phone audit, build output, downloaded tools and private signing key.
+/audit/
+/build/
+/output/
+/tools/.signing/
+/tools/aapt2
+/tools/uber-apk-signer.jar
+
+# Private device inventory and local generation/build helpers are not published.
+/tools/
+/custom-icons/
+/scripts/__pycache__/
+!/previews/*.png

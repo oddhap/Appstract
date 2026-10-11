@@ -1,3 +1,72 @@
+# Appstract Pixel 9
+
+A community fork of [mirrorkeydev/Appstract](https://github.com/mirrorkeydev/Appstract) with **86 additional icons** and a **dynamic calendar showing the current day of the month**.
+
+[Download the latest APK](https://github.com/oddhap/Appstract/releases/latest)
+
+- All 591 original Appstract icons are retained.
+- 86 additional icons follow Appstract's large geometric shapes, limited palette, and 6 px strokes.
+- 31 calendar date variants, with dynamic Google Calendar bindings.
+- Transparent light and dark PNG exports at 192 × 192, plus editable SVG sources.
+- Updated activity mappings for recent app versions.
+
+![Original and new artwork](previews/style-comparison.png)
+
+![Dynamic calendar](previews/dynamic-calendar.png)
+
+[View all 86 new icons](previews/new-icons.png)
+
+## Install
+
+Download `Appstract-Pixel9.apk` from [Releases](https://github.com/oddhap/Appstract/releases/latest), install it, and select **Appstract Pixel 9** in your icon-pack-compatible launcher. Its package name is `dev.appstract.pixel9`, so it installs alongside Appstract.
+
+Dynamic dates follow the device's local date when the launcher supports the dynamic calendar API. Murine Launcher supports this convention. A manually selected date image is a static icon; use the calendar app's default icon from the pack for automatic dates.
+
+## Artwork and configuration
+
+- `icons/svgs/custom_*.svg`: the new editable designs.
+- `icons/appstract-light/custom_*.png`: black-stroke exports.
+- `icons/appstract-dark/custom_*.png`: white-stroke exports.
+- `custom_calendar_1` through `custom_calendar_31`: daily calendar variants.
+- `app/xml/appfilter.xml`: static mappings and dynamic calendar prefixes.
+- `app/xml/drawable.xml`: the icon-picker catalog.
+
+The original artwork remains in its original folders. New icons follow the upstream [design guide](CONTRIBUTING.md).
+
+## Build the APK
+
+Like the upstream repository, this repository primarily distributes artwork and configuration. The included build script overlays these resources on the public [yangchoo/Appstract v5.0.6 dashboard APK](https://github.com/yangchoo/Appstract/releases/tag/v5.0.6); it does not contain a separate Gradle dashboard project.
+
+Requirements: Python 3, a JDK on PATH, and Apktool **3.0.3**. On macOS, `brew install apktool` installs Apktool and its Java dependency. Ensure Java is on PATH, for example `export PATH="$(brew --prefix openjdk)/bin:$PATH"`.
+
+```sh
+python3 scripts/build_pack.py
+```
+
+The script downloads the pinned public base APK, checks its SHA-256, decodes it in a temporary build folder, copies the artwork and mappings, verifies resource references, and produces `output/Appstract-Pixel9-unsigned.apk`. PNG exports are checked in, so rasterization tools are not required to build.
+
+To create an installable APK, use your own Android signing key and [uber-apk-signer 1.3.0](https://github.com/patrickfav/uber-apk-signer/releases/tag/v1.3.0):
+
+```sh
+# Set APPSTRACT_KEYSTORE_PASSWORD in your environment without committing it.
+python3 scripts/build_pack.py \
+  --keystore /path/to/your.keystore \
+  --ks-alias pixel9 \
+  --signer-jar /path/to/uber-apk-signer-1.3.0.jar
+```
+
+This produces `output/Appstract-Pixel9.apk`. Release APKs use the maintainer's private key; that key is not included in this repository. Your own signed builds use your signing identity.
+
+The expected base APK SHA-256 is `dfdae011e8057f3473818beb1d79f001766ca101b7aaab548083f1f880840541`. The signer JAR used for this release has SHA-256 `e1299fd6fcf4da527dd53735b56127e8ea922a321128123b9c32d619bba1d835`.
+
+## License and attribution
+
+Apache License 2.0. See [LICENSE.md](LICENSE.md) and [NOTICE.md](NOTICE.md) for the original artwork, maintained dashboard, third-party attribution, and this fork's additions.
+
+---
+
+## Original upstream README
+
 # Appstract Icon Pack
 
 > **IMPORTANT:** This project is now archived, but all nearly 600 icons will continue to be available for public use and enjoyment [here](https://github.com/mirrorkeydev/Appstract/tree/master/icons). Please use these in whatever fashion you like -- FOSS applications are particularly encouraged.
